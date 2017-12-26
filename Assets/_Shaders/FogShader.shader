@@ -54,38 +54,34 @@ Shader "MildMania/FogShader"
 				v2f o;
 
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = v.uv;
-				//o.uvgrab = ComputeGrabScreenPos(o.vertex);
+				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				//float time = _SinTime[3];	
+				float time = _Time[2];
 
+				float sinTime = _SinTime[3];
 
-				//i.uvgrab.x += (disp.r * 2.0 - 1.0) * _DispCoef * time;
-				//i.uvgrab.y -= (disp.g * 2.0 - 1.0) * _DispCoef * time;
-
- 
-				//fixed4 col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uvgrab));
-
-				float time = _Time[0];
-				float sinTime = _SinTime[2];
+				float normalizedSinTime = (sinTime + 1.0) / 2.0;
 
 				float2 dispuv = i.uv;
-				dispuv.y += _FlowSpeed * time;
-				
-				fixed4 disp = tex2D(_DispTex, dispuv);
 
-				i.uv.x += (disp.r * 2.0 - 1.0) * _DispCoef * sinTime;
-				i.uv.y -= (disp.g * 2.0 - 1.0) * _DispCoef * sinTime;
+				fixed4 disp = tex2D(_DispTex, dispuv / _MainTex_ST.xy);
+
+				disp.a = normalizedSinTime;
+
+				fixed4 transparency = tex2D(_TransparencyMask, i.uv / _MainTex_ST.xy);
+
+				i.uv.x += (disp.g * 2.0 - 1.0) * _DispCoef * time * disp.a;
+				i.uv.y -= (disp.r * 2.0 - 1.0) * _DispCoef * time * disp.a;
 
 				fixed4 mainColor = tex2D(_MainTex, i.uv);
-				fixed4 transparency = tex2D(_TransparencyMask, i.uv);
 
 				mainColor.a = transparency.a;
+
 
 				return mainColor;
 			}

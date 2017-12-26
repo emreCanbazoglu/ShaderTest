@@ -104,7 +104,7 @@
                 {
 					for(int d = 0; d < 16; d++)
 					{
-						float sampleAlpha = tex2D(_MainTex, texCoord + Disc[d] * _MainTex_TexelSize * outlineSize).a;
+						float sampleAlpha = tex2D(_MainTex, texCoord + Disc[d] * _MainTex_TexelSize * i).a;
 
 						if(sampleAlpha > alphaThreshold)
 							return 1;
