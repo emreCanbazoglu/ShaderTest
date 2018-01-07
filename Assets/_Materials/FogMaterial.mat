@@ -35,7 +35,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DispTex:
-        m_Texture: {fileID: 2800000, guid: 5356b15ec02cefa47b3947c1750fa102, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5908ca49504c11a4ca7c277e7fb8e2d7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -63,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TransparencyMask:
-        m_Texture: {fileID: 2800000, guid: 59622bd0225b09e469b4aabc6acd44b0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 30a655fbaa1733c4d89c05f310e09651, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TransparencyTex:
@@ -74,9 +74,9 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DispCoef: 0.03
+    - _DispCoef: 0.08
     - _DstBlend: 0
-    - _FlowSpeed: 0.1
+    - _FlowSpeed: 0.2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
