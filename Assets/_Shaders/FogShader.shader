@@ -71,12 +71,15 @@ Shader "MildMania/FogShader"
 
 				fixed4 disp = tex2D(_DispTex, dispuv / _MainTex_ST.xy);
 
-				disp.a = normalizedSinTime;
+				dispuv.x += (disp.g * 2.0 - 1.0) * _FlowSpeed * time;
+				dispuv.y -= (disp.r * 2.0 - 1.0) * _FlowSpeed * time;
+
+				disp = tex2D(_DispTex, dispuv / _MainTex_ST.xy);
 
 				fixed4 transparency = tex2D(_TransparencyMask, i.uv / _MainTex_ST.xy);
 
-				i.uv.x += (disp.g * 2.0 - 1.0) * _DispCoef * time * disp.a;
-				i.uv.y -= (disp.r * 2.0 - 1.0) * _DispCoef * time * disp.a;
+				i.uv.x += (disp.g * 2.0 - 1.0) * _DispCoef;
+				i.uv.y -= (disp.r * 2.0 - 1.0) * _DispCoef;
 
 				fixed4 mainColor = tex2D(_MainTex, i.uv);
 
